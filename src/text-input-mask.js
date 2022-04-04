@@ -1,6 +1,9 @@
 import BaseTextComponent from './base-text-component';
 import React from 'react';
 
+import MaskService from './mask-service';
+export { MaskService };
+
 export default class TextInputMask extends BaseTextComponent {
 
 	getElement() {

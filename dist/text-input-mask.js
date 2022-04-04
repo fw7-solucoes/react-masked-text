@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react')) :
-  typeof define === 'function' && define.amd ? define(['react'], factory) :
-  (global.ReactTextMask = factory(global.react));
-}(this, (function (React) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react'], factory) :
+  (factory((global.ReactTextMask = {}),global.react));
+}(this, (function (exports,React) { 'use strict';
 
   var React__default = 'default' in React ? React['default'] : React;
 
@@ -25,6 +25,9 @@
   function _createClass(Constructor, protoProps, staticProps) {
     if (protoProps) _defineProperties(Constructor.prototype, protoProps);
     if (staticProps) _defineProperties(Constructor, staticProps);
+    Object.defineProperty(Constructor, "prototype", {
+      writable: false
+    });
     return Constructor;
   }
 
@@ -58,6 +61,9 @@
         configurable: true
       }
     });
+    Object.defineProperty(subClass, "prototype", {
+      writable: false
+    });
     if (superClass) _setPrototypeOf(subClass, superClass);
   }
 
@@ -75,6 +81,19 @@
     };
 
     return _setPrototypeOf(o, p);
+  }
+
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   function _objectWithoutPropertiesLoose(source, excluded) {
@@ -124,9 +143,30 @@
   function _possibleConstructorReturn(self, call) {
     if (call && (typeof call === "object" || typeof call === "function")) {
       return call;
+    } else if (call !== void 0) {
+      throw new TypeError("Derived constructors may only return object or undefined");
     }
 
     return _assertThisInitialized(self);
+  }
+
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
   }
 
   function _superPropBase(object, property) {
@@ -138,7 +178,7 @@
     return object;
   }
 
-  function _get(target, property, receiver) {
+  function _get() {
     if (typeof Reflect !== "undefined" && Reflect.get) {
       _get = Reflect.get;
     } else {
@@ -149,22 +189,20 @@
         var desc = Object.getOwnPropertyDescriptor(base, property);
 
         if (desc.get) {
-          return desc.get.call(receiver);
+          return desc.get.call(arguments.length < 3 ? target : receiver);
         }
 
         return desc.value;
       };
     }
 
-    return _get(target, property, receiver || target);
+    return _get.apply(this, arguments);
   }
 
   // import * as VanillaMasker from '../internal-dependencies/vanilla-masker';
   var VMasker = require('./internal-dependencies/vanilla-masker.js');
 
-  var BaseMask =
-  /*#__PURE__*/
-  function () {
+  var BaseMask = /*#__PURE__*/function () {
     function BaseMask() {
       _classCallCheck(this, BaseMask);
     }
@@ -224,15 +262,15 @@
     withDDD: true,
     dddMask: '(99) '
   };
-  var CelPhoneMask =
-  /*#__PURE__*/
-  function (_BaseMask) {
+  var CelPhoneMask = /*#__PURE__*/function (_BaseMask) {
     _inherits(CelPhoneMask, _BaseMask);
+
+    var _super = _createSuper(CelPhoneMask);
 
     function CelPhoneMask() {
       _classCallCheck(this, CelPhoneMask);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(CelPhoneMask).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(CelPhoneMask, [{
@@ -352,15 +390,15 @@
     return isValid;
   };
 
-  var CpfMask =
-  /*#__PURE__*/
-  function (_BaseMask) {
+  var CpfMask = /*#__PURE__*/function (_BaseMask) {
     _inherits(CpfMask, _BaseMask);
+
+    var _super = _createSuper(CpfMask);
 
     function CpfMask() {
       _classCallCheck(this, CpfMask);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(CpfMask).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(CpfMask, [{
@@ -393,15 +431,15 @@
   var CREDIT_CARD_SETTINGS = {
     obfuscated: false
   };
-  var CreditCardMask =
-  /*#__PURE__*/
-  function (_BaseMask) {
+  var CreditCardMask = /*#__PURE__*/function (_BaseMask) {
     _inherits(CreditCardMask, _BaseMask);
+
+    var _super = _createSuper(CreditCardMask);
 
     function CreditCardMask() {
       _classCallCheck(this, CreditCardMask);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(CreditCardMask).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(CreditCardMask, [{
@@ -464,15 +502,15 @@
       return val;
     }
   };
-  var CustomMask =
-  /*#__PURE__*/
-  function (_BaseMask) {
+  var CustomMask = /*#__PURE__*/function (_BaseMask) {
     _inherits(CustomMask, _BaseMask);
+
+    var _super = _createSuper(CustomMask);
 
     function CustomMask() {
       _classCallCheck(this, CustomMask);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(CustomMask).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(CustomMask, [{
@@ -523,15 +561,15 @@
   var DATETIME_MASK_SETTINGS = {
     format: 'DD/MM/YYYY HH:mm:ss'
   };
-  var DatetimeMask =
-  /*#__PURE__*/
-  function (_BaseMask) {
+  var DatetimeMask = /*#__PURE__*/function (_BaseMask) {
     _inherits(DatetimeMask, _BaseMask);
+
+    var _super = _createSuper(DatetimeMask);
 
     function DatetimeMask() {
       _classCallCheck(this, DatetimeMask);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(DatetimeMask).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(DatetimeMask, [{
@@ -597,15 +635,15 @@
     suffixUnit: '',
     zeroCents: false
   };
-  var MoneyMask =
-  /*#__PURE__*/
-  function (_BaseMask) {
+  var MoneyMask = /*#__PURE__*/function (_BaseMask) {
     _inherits(MoneyMask, _BaseMask);
+
+    var _super = _createSuper(MoneyMask);
 
     function MoneyMask() {
       _classCallCheck(this, MoneyMask);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(MoneyMask).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(MoneyMask, [{
@@ -660,15 +698,15 @@
     return MoneyMask;
   }(BaseMask);
 
-  var OnlyNumbersMask =
-  /*#__PURE__*/
-  function (_BaseMask) {
+  var OnlyNumbersMask = /*#__PURE__*/function (_BaseMask) {
     _inherits(OnlyNumbersMask, _BaseMask);
+
+    var _super = _createSuper(OnlyNumbersMask);
 
     function OnlyNumbersMask() {
       _classCallCheck(this, OnlyNumbersMask);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(OnlyNumbersMask).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(OnlyNumbersMask, [{
@@ -697,15 +735,15 @@
   }(BaseMask);
 
   var ZIP_CODE_MASK = '99999-999';
-  var ZipCodeMask =
-  /*#__PURE__*/
-  function (_BaseMask) {
+  var ZipCodeMask = /*#__PURE__*/function (_BaseMask) {
     _inherits(ZipCodeMask, _BaseMask);
+
+    var _super = _createSuper(ZipCodeMask);
 
     function ZipCodeMask() {
       _classCallCheck(this, ZipCodeMask);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(ZipCodeMask).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(ZipCodeMask, [{
@@ -758,15 +796,15 @@
     return dig1 * 10 + dig2 == digito;
   };
 
-  var CnpjMask =
-  /*#__PURE__*/
-  function (_BaseMask) {
+  var CnpjMask = /*#__PURE__*/function (_BaseMask) {
     _inherits(CnpjMask, _BaseMask);
+
+    var _super = _createSuper(CnpjMask);
 
     function CnpjMask() {
       _classCallCheck(this, CnpjMask);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(CnpjMask).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(CnpjMask, [{
@@ -810,9 +848,7 @@
 
   var maskKeys = Object.keys(Masks);
 
-  var MaskResolver =
-  /*#__PURE__*/
-  function () {
+  var MaskResolver = /*#__PURE__*/function () {
     function MaskResolver() {
       _classCallCheck(this, MaskResolver);
     }
@@ -837,17 +873,17 @@
     return MaskResolver;
   }();
 
-  var BaseTextComponent =
-  /*#__PURE__*/
-  function (_Component) {
+  var BaseTextComponent = /*#__PURE__*/function (_Component) {
     _inherits(BaseTextComponent, _Component);
+
+    var _super = _createSuper(BaseTextComponent);
 
     function BaseTextComponent(props) {
       var _this;
 
       _classCallCheck(this, BaseTextComponent);
 
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(BaseTextComponent).call(this, props));
+      _this = _super.call(this, props);
 
       _this._resolveMaskHandler(props.kind);
 
@@ -945,15 +981,35 @@
     return BaseTextComponent;
   }(React.Component);
 
-  var TextInputMask =
-  /*#__PURE__*/
-  function (_BaseTextComponent) {
+  var MaskService = /*#__PURE__*/function () {
+    function MaskService() {
+      _classCallCheck(this, MaskService);
+    }
+
+    _createClass(MaskService, null, [{
+      key: "toMask",
+      value: function toMask(type, value, settings) {
+        return MaskResolver.resolve(type).getValue(value, settings);
+      }
+    }, {
+      key: "isValid",
+      value: function isValid(type, value, settings) {
+        return MaskResolver.resolve(type).validate(value, settings);
+      }
+    }]);
+
+    return MaskService;
+  }();
+
+  var TextInputMask = /*#__PURE__*/function (_BaseTextComponent) {
     _inherits(TextInputMask, _BaseTextComponent);
+
+    var _super = _createSuper(TextInputMask);
 
     function TextInputMask() {
       _classCallCheck(this, TextInputMask);
 
-      return _possibleConstructorReturn(this, _getPrototypeOf(TextInputMask).apply(this, arguments));
+      return _super.apply(this, arguments);
     }
 
     _createClass(TextInputMask, [{
@@ -1017,7 +1073,7 @@
           console.error("react-masked-text: ERROR - defaultValue and value shouldn't be set at the same time!");
         }
 
-        return React__default.createElement("input", _extends({
+        return /*#__PURE__*/React__default.createElement("input", _extends({
           ref: function ref(_ref) {
             _this._input = _ref;
           },
@@ -1032,6 +1088,9 @@
     return TextInputMask;
   }(BaseTextComponent);
 
-  return TextInputMask;
+  exports.MaskService = MaskService;
+  exports.default = TextInputMask;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
